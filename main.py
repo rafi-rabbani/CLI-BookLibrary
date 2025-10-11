@@ -41,4 +41,4 @@ if __name__ == "__main__":
         if lanjut.lower() == "n":
             break
 
-    print(f"\n{'PROGRAM PERPUSTAKAAN DIGITAL TELAH BERAKHIR!!':^133}\n")
+    print(f"\n{'PROGRAM PERPUSTAKAAN DIGITAL TELAH BERAKHIR!!':-^133}\n")

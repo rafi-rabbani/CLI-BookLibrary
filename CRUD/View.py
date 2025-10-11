@@ -11,7 +11,7 @@ def read_terminal():
     #* header
     print(f"\n{'='*133}")
 
-    print(f"|{index:^4}|{penulis:^59}|{judul:^58}|{tahun:^7}|")
+    print(f"|{index:^4}|{judul:^58}|{penulis:^59}|{tahun:^7}|")
     print("-"*133)
 
     #* data
@@ -25,7 +25,7 @@ def read_terminal():
         judul = data_break[3]
         tahun = data_break[4]
 
-        print(f"|{(str(index+1)) + '.':^4}| {penulis:.58}| {judul:.57}| {tahun:^4}  |")
+        print(f"|{(str(index+1)) + '.':^4}| {judul:.57}| {penulis:.58}| {tahun:^4}  |")
 
     #* footer
     print(f"{'='*133}\n")
@@ -44,10 +44,18 @@ def create_terminal():
     while(True):
         try:
             tahun = int(input("TAHUN\t: "))
-            break
+
+            if len(str(tahun)) == 4:
+                break
+            else:
+                print("Tahun tidak sesuai, silahkan masukkan tahun lagi")
         except:
             print("Tahun harus berupa angka, silahkan masukkan tahun lagi")
 
-
     #* footer
     print(f"{'='*133}\n")
+
+    Operasi.create(judul, penulis, tahun)
+    print(f"{'BUKU TERSIMPAN':^133}")
+    read_terminal()
+
