@@ -1,11 +1,11 @@
 from . import Operasi
 
 def read_terminal():
-    data_file = Operasi.read()
+    data = Operasi.read()
 
     index = "NO"
-    penulis = "PENULIS"
     judul = "JUDUL"
+    penulis = "PENULIS"
     tahun = "TAHUN"
 
     #* header
@@ -15,14 +15,14 @@ def read_terminal():
     print("-"*133)
 
     #* data
-    for index,data in enumerate(data_file):
+    for index,data_buku in enumerate(data):
 
         # memisah data (break) melalui [,]
-        data_break = data.strip().split(",")
+        data_break = data_buku.strip().split(",")
         pk = data_break[0]
         date_add = data_break[1]
-        penulis = data_break[2]
-        judul = data_break[3]
+        judul = data_break[2]
+        penulis = data_break[3]
         tahun = data_break[4]
 
         print(f"|{(str(index+1)) + '.':^4}| {judul:.57}| {penulis:.58}| {tahun:^4}  |")
@@ -58,4 +58,63 @@ def create_terminal():
     Operasi.create(judul, penulis, tahun)
     print(f"{'BUKU TERSIMPAN':^133}")
     read_terminal()
+
+def update_terminal():
+    read_terminal()
+
+    #* header
+    print(f"\n{'='*133}")
+
+    while(True):
+        no_buku = int(input("Silahkan pilih nomor buku yang akan diubah\nNOMOR BUKU\t: "))
+        data_buku = Operasi.read(index=no_buku) # mengambil data buku berdasarkan No. buku
+
+        if data_buku:
+            break
+
+    # mengambil data tiap komponen
+    data_break = data_buku.strip().split(",")
+    pk = data_break[0]
+    date_add = data_break[1]
+    judul = data_break[2]
+    penulis = data_break[3]
+    tahun = data_break[4]
+
+    while(True):
+        # data yang ingin diubah
+        option = int(input(
+            "\nSilahkan pilih komponen yang ingin anda ubah" +
+            f"\n1. Judul\t:{judul:.50}" +
+            f"\n2. Penulis\t:{penulis:.50}" +
+            f"\n3. Tahun\t:{tahun:.50}" +
+            "\nNomor komponen : "))
+        
+        # memilih komponen untuk diubah
+        match (option):
+            case 1 : judul = input("\njudul\t: ")
+            case 2 : penulis = input("\npenulis\t: ")
+            case 3 :
+                while(True):
+                    try:
+                        tahun = int(input("\ntahun\t: "))
+                        if (len(str(tahun)) == 4):
+                            break
+                        else:
+                            print("tahun tidak valid")
+                    except:
+                        print("tahun harus berupa angka")
+            case _ :
+                print("nomor komponen tidak valid")
+        
+        #* footer
+        print(f"{'='*133}\n")
+
+        lanjut = input("lanjutkan mengubah komponen? (y/n) : ")
+        if lanjut.lower() == "n":
+            break
+
+    Operasi.update(pk, date_add, no_buku, judul, penulis, tahun)
+
+
+
 

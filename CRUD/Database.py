@@ -1,12 +1,12 @@
 from . import Operasi
 
-DB_NAME = "data.txt"
+DB_NAME = "library.txt"
 
 TEMPLATE = {
     "pk" : "xxxxxx",
     "date_add" : "yyyy-mm-dd",
-    "penulis" : 255 * " ",
     "judul" : 255 * " ",
+    "penulis" : 255 * " ",
     "tahun" : "yyyy"
 }
 
