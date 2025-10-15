@@ -74,11 +74,11 @@ def update_terminal():
 
     # mengambil data tiap komponen
     data_break = data_buku.strip().split(",")
-    pk = data_break[0]
-    date_add = data_break[1]
-    judul = data_break[2]
-    penulis = data_break[3]
-    tahun = data_break[4]
+    pk = data_break[0].strip()
+    date_add = data_break[1].strip()
+    judul = data_break[2].strip()
+    penulis = data_break[3].strip()
+    tahun = data_break[4].strip()
 
     while(True):
         # data yang ingin diubah

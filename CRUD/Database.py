@@ -2,12 +2,19 @@ from . import Operasi
 
 DB_NAME = "library.txt"
 
+#* panjang setiap kolom
+PK_LEN = 6
+DATE_LEN = 30
+JUDUL_LEN = 255
+PENULIS_LEN = 255
+TAHUN_LEN = 4
+
 TEMPLATE = {
-    "pk" : "xxxxxx",
-    "date_add" : "yyyy-mm-dd",
-    "judul" : 255 * " ",
-    "penulis" : 255 * " ",
-    "tahun" : "yyyy"
+    "pk"        : PK_LEN        * " ",
+    "date_add"  : DATE_LEN      * " ",
+    "judul"     : JUDUL_LEN     * " ",
+    "penulis"   : PENULIS_LEN   * " ",
+    "tahun"     : TAHUN_LEN     * " "
 }
 
 def init_terminal():
