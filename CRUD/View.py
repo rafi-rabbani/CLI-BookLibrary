@@ -67,7 +67,7 @@ def update_terminal():
 
     while(True):
         no_buku = int(input("Silahkan pilih nomor buku yang akan diubah\nNOMOR BUKU\t: "))
-        data_buku = Operasi.read(index=no_buku) # mengambil data buku berdasarkan No. buku
+        data_buku = Operasi.read(no_buku = no_buku) # mengambil data buku berdasarkan No. buku
 
         if data_buku:
             break
