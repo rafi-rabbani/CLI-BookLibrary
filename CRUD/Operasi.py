@@ -78,23 +78,27 @@ def create_first_data():
     #     print("data pertama gagal dibuat")
 
 def read(**kwargs):
-    try:
-        with open(Database.DB_NAME, "r") as file:
-            isi = file.readlines() # membuat list dari database per baris
-            jumlah_buku = len(isi) # menghitung jumlah data di list
+    data_buku = Database.DB_LIST
+    jumlah_buku = len(Database.DB_LIST)
 
-            if "no_buku" in kwargs:
-                index_buku = kwargs["no_buku"]-1
-                if index_buku < 0 or index_buku >= jumlah_buku: # kondisi salah
-                    print("nomor buku tidak sesuai")
-                    return False
-                else:
-                    return isi[index_buku]
-            else: 
-                return isi
-    except:
-        print("database gagal dibaca")
-        return False
+    if "no_buku" in kwargs:
+        index_buku = kwargs["no_buku"]-1
+        if index_buku < 0 or index_buku >= jumlah_buku: # kondisi salah
+            print("nomor buku tidak sesuai")
+            return False
+        else:
+            return data_buku[index_buku]
+    else: 
+        return data_buku
+    
+    # try:
+    #     with open(Database.DB_NAME, "r") as file:
+    #         isi = file.readlines() # membuat list dari database per baris
+    #         jumlah_buku = len(isi) # menghitung jumlah data di list
+
+    # except:
+    #     print("database gagal dibaca")
+    #     return False
     
 def create(judul, penulis, tahun):
     data = Database.TEMPLATE.copy()
