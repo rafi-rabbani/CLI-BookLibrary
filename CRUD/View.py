@@ -17,15 +17,13 @@ def read_terminal():
     #* data
     for index,data_buku in enumerate(data):
 
-        # memisah data (break) melalui [,]
-        data_break = data_buku.strip().split(",")
-        pk = data_break[0]
-        date_add = data_break[1]
-        judul = data_break[2]
-        penulis = data_break[3]
-        tahun = data_break[4]
+        pk = data_buku["pk"]
+        date_add = data_buku["date_add"]
+        judul = data_buku["judul"]
+        penulis = data_buku["penulis"]
+        tahun = data_buku["tahun"]
 
-        print(f"|{(str(index+1)) + '.':^4}| {judul:.57}| {penulis:.58}| {tahun:^4}  |")
+        print(f"|{(str(index+1)) + '.':^4}| {judul:57}| {penulis:58}| {tahun:^4}  |")
 
     #* footer
     print(f"{'='*133}\n")

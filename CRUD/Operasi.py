@@ -67,15 +67,6 @@ def create_first_data():
 
     # memasukkan dict data buku ke list utama
     Database.DB_LIST.append(data)
-    print(Database.DB_LIST)
-
-    # # mengambil data buku dari list utama, menulisnya di file txt
-    # try:
-    #     with open(Database.DB_NAME, "w", encoding="utf-8") as file:
-    #         for book in Database.DB_LIST:
-    #             file.write(format_data(book))
-    # except:
-    #     print("data pertama gagal dibuat")
 
 def read(**kwargs):
     data_buku = Database.DB_LIST
@@ -101,21 +92,33 @@ def read(**kwargs):
     #     return False
     
 def create(judul, penulis, tahun):
-    data = Database.TEMPLATE.copy()
+    # mengubah data buku jadi dict
+    data = {
+    "pk"        : (str_random(Database.PK_LEN)),
+    "date_add"  : (time.strftime("%d-%m-%Y %H:%M (GMT%z)", time.gmtime())),
+    "judul"     : judul,
+    "penulis"   : penulis,
+    "tahun"     : tahun
+    }
 
-    data["pk"] = str_random(Database.PK_LEN)
-    data["date_add"] = time.strftime("%d-%m-%Y %H:%M (GMT%z)", time.gmtime())
-    data["judul"] = judul
-    data["penulis"] = penulis
-    data["tahun"] = str(tahun)
+    # memasukkan dict data buku ke list utama
+    Database.DB_LIST.append(data)
 
-    isi_data = format_data(data)
+    # data = Database.TEMPLATE.copy()
 
-    try:
-        with open(Database.DB_NAME, "a", encoding="utf-8") as file:
-            file.write(isi_data)
-    except:
-        print("data gagal tersimpan")
+    # data["pk"] = str_random(Database.PK_LEN)
+    # data["date_add"] = time.strftime("%d-%m-%Y %H:%M (GMT%z)", time.gmtime())
+    # data["judul"] = judul
+    # data["penulis"] = penulis
+    # data["tahun"] = str(tahun)
+
+    # isi_data = format_data(data)
+
+    # try:
+    #     with open(Database.DB_NAME, "a", encoding="utf-8") as file:
+    #         file.write(isi_data)
+    # except:
+    #     print("data gagal tersimpan")
 
 def update(pk, date_add, no_buku, judul, penulis, tahun):
 
