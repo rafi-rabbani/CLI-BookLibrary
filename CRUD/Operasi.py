@@ -24,11 +24,11 @@ def load_database():
 
                 # membuat dict dari detail buku yang sudah di pecah di dalam list
                 buku = {
-                        "pk"        : data_break[0],
-                        "date_add"  : data_break[1],
-                        "judul"     : data_break[2],
-                        "penulis"   : data_break[3],
-                        "tahun"     : data_break[4]
+                        "pk"        : data_break[0].strip(),
+                        "date_add"  : data_break[1].strip(),
+                        "judul"     : data_break[2].strip(),
+                        "penulis"   : data_break[3].strip(),
+                        "tahun"     : data_break[4].strip()
                         }
 
                 # memasukkan dict ke dalam list
