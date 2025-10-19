@@ -39,6 +39,7 @@ if __name__ == "__main__":
         lanjut = input("lanjutkan program (y/n) : ")
 
         if lanjut.lower() == "n":
+            CRUD.simpan_data()
             break
 
     print(f"\n{'PROGRAM PERPUSTAKAAN DIGITAL TELAH BERAKHIR!!':-^133}\n")

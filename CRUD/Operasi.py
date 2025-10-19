@@ -141,3 +141,18 @@ def update(pk, date_add, no_buku, judul, penulis, tahun):
             file.flush()
     except:
         print("perubahan gagal tersimpan")
+
+def simpan_data():
+    """menyimpan list data utama yg telah terformat kedalam file txt"""
+    try:
+        # membuka dalam mode (w) (menulis ulang semua)
+        with open(Database.DB_NAME, "w", encoding="utf-8") as file:
+            # mengulang untuk seluruh isi list
+            for buku in Database.DB_LIST:
+                # memformat tiap data dengan padding
+                data_terformat = format_data(buku)
+                # menulisnya di file txt
+                file.write(data_terformat)
+    except:
+        # keluar jika data gagal tersimpan di file txt
+        print("data gagal tersimpan")
