@@ -2,7 +2,17 @@ import time
 from . import Database
 from .Util import str_random
 
-def ambil_database():
+def format_data(data):
+    """memformat database sebelum masuk ke file txt"""
+    return (
+            f"{data["pk"]       :<{Database.TEMPLATE_LEN["pk"]}},"
+            f"{data["date_add"] :<{Database.TEMPLATE_LEN["date_add"]}},"
+            f"{data["judul"]    :<{Database.TEMPLATE_LEN["judul"]}},"
+            f"{data["penulis"]  :<{Database.TEMPLATE_LEN["penulis"]}},"
+            f"{data["tahun"]    :<{Database.TEMPLATE_LEN["tahun"]}}\n"
+            )
+
+def load_database():
     """membaca database dan memasukkannya kedalam dict in list"""
     try:
         # membaca file txt (r)
@@ -26,16 +36,6 @@ def ambil_database():
 
     except:
         print("database gagal diambil")
-
-def format_data(data):
-    """memformat database sebelum masuk ke file txt"""
-    return (
-            f"{data["pk"]       :<{Database.TEMPLATE_LEN["pk"]}},"
-            f"{data["date_add"] :<{Database.TEMPLATE_LEN["date_add"]}},"
-            f"{data["judul"]    :<{Database.TEMPLATE_LEN["judul"]}},"
-            f"{data["penulis"]  :<{Database.TEMPLATE_LEN["penulis"]}},"
-            f"{data["tahun"]    :<{Database.TEMPLATE_LEN["tahun"]}}\n"
-            )
 
 def create_first_data():
     """membuat data pertama, jika file belum ada"""
@@ -69,16 +69,23 @@ def create_first_data():
     Database.DB_LIST.append(data)
 
 def read(**kwargs):
+    # mengambil list database buku
     data_buku = Database.DB_LIST
+    # menghitung jumlah data buku
     jumlah_buku = len(Database.DB_LIST)
 
+    # mengambil data buku berdasarkan no buku
     if "no_buku" in kwargs:
+        # menghitung index buku berdasarkan no buku
         index_buku = kwargs["no_buku"]-1
-        if index_buku < 0 or index_buku >= jumlah_buku: # kondisi salah
+        # jika no buku tidak ada
+        if index_buku < 0 or index_buku >= jumlah_buku:
             print("nomor buku tidak sesuai")
             return False
+        # jika no buku tersedia
         else:
             return data_buku[index_buku]
+    # jika tidak mengambil data buku berdasarkan no buku
     else: 
         return data_buku
     
@@ -110,7 +117,7 @@ def update(pk, date_add, no_buku, judul, penulis, tahun):
     Database.DB_LIST[index_buku] = data
     
 
-def simpan_data():
+def save_database():
     """menyimpan list data utama yg telah terformat kedalam file txt"""
     try:
         # membuka dalam mode (w) (menulis ulang semua)

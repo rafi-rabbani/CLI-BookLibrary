@@ -1,8 +1,10 @@
 from . import Operasi
 
 def read_terminal():
+    # mengambil list database
     data = Operasi.read()
 
+    # persiapan penulisan tabel
     index = "NO"
     judul = "JUDUL"
     penulis = "PENULIS"
@@ -11,18 +13,19 @@ def read_terminal():
     #* header
     print(f"\n{'='*133}")
 
+    # header tabel
     print(f"|{index:^4}|{judul:^58}|{penulis:^59}|{tahun:^7}|")
     print("-"*133)
 
-    #* data
+    # mengulang untuk setiap buku
     for index,data_buku in enumerate(data):
-
+        # mengambil detail tiap data buku
         pk = data_buku["pk"]
         date_add = data_buku["date_add"]
         judul = data_buku["judul"]
         penulis = data_buku["penulis"]
         tahun = data_buku["tahun"]
-
+        # mengeluarkan detail buku di dalam tabel
         print(f"|{(str(index+1)) + '.':^4}| {judul:57}| {penulis:58}| {tahun:^4}  |")
 
     #* footer
@@ -32,29 +35,35 @@ def create_terminal():
     #* header
     print(f"\n{'='*133}")
     
-    #* data
+    # mengambil data buku dari user
     print(F"{'SILAHKAN MASUKKAN DATA BUKU BARU':^133}")
     print(f"{'='*133}")
-
+    # mengambil input judul
     judul = input("JUDUL\t: ")
+    # mengambil input penulis
     penulis = input("PENULIS\t: ")
-
+    # perulangan validasi input tahun
     while(True):
         try:
+            # mengambil input tahun
             tahun = int(input("TAHUN\t: "))
-
+            # validasi input
             if len(str(tahun)) == 4:
                 break
+            # jika tahun tidak sesuai
             else:
                 print("Tahun tidak sesuai, silahkan masukkan tahun lagi")
+        # jika tahun bukan berupa angka
         except:
             print("Tahun harus berupa angka, silahkan masukkan tahun lagi")
 
     #* footer
     print(f"{'='*133}\n")
 
+    # memanggil operasi create dan memberikan input user berupa (judul, penulis, tahun)
     Operasi.create(judul, penulis, tahun)
     print(f"{'BUKU TERSIMPAN':^133}")
+    # menampilkan database buku yang sudah tersimpan
     read_terminal()
 
 def update_terminal():
