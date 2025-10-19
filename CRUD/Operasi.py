@@ -82,15 +82,6 @@ def read(**kwargs):
     else: 
         return data_buku
     
-    # try:
-    #     with open(Database.DB_NAME, "r") as file:
-    #         isi = file.readlines() # membuat list dari database per baris
-    #         jumlah_buku = len(isi) # menghitung jumlah data di list
-
-    # except:
-    #     print("database gagal dibaca")
-    #     return False
-    
 def create(judul, penulis, tahun):
     # mengubah data buku jadi dict
     data = {
@@ -104,43 +95,20 @@ def create(judul, penulis, tahun):
     # memasukkan dict data buku ke list utama
     Database.DB_LIST.append(data)
 
-    # data = Database.TEMPLATE.copy()
-
-    # data["pk"] = str_random(Database.PK_LEN)
-    # data["date_add"] = time.strftime("%d-%m-%Y %H:%M (GMT%z)", time.gmtime())
-    # data["judul"] = judul
-    # data["penulis"] = penulis
-    # data["tahun"] = str(tahun)
-
-    # isi_data = format_data(data)
-
-    # try:
-    #     with open(Database.DB_NAME, "a", encoding="utf-8") as file:
-    #         file.write(isi_data)
-    # except:
-    #     print("data gagal tersimpan")
-
 def update(pk, date_add, no_buku, judul, penulis, tahun):
-
-    data = Database.TEMPLATE.copy()
-
-    data["pk"] = pk
-    data["date_add"] = date_add
-    data["judul"] = judul
-    data["penulis"] = penulis
-    data["tahun"] = str(tahun)
-
-    isi_data = format_data(data)
-
-    panjang_data = len(format_data(Database.TEMPLATE))
-
-    try:
-        with open(Database.DB_NAME, "r+", encoding="utf-8") as file:
-            file.seek(panjang_data*(no_buku-1))
-            file.write(isi_data)
-            file.flush()
-    except:
-        print("perubahan gagal tersimpan")
+    # mengubah data buku jadi dict
+    data = {
+    "pk"        : pk,
+    "date_add"  : date_add,
+    "judul"     : judul,
+    "penulis"   : penulis,
+    "tahun"     : tahun
+    }
+    # mengambil index buku berdasarkan no buk
+    index_buku = no_buku-1
+    # mengubah list data buku sesuai index
+    Database.DB_LIST[index_buku] = data
+    
 
 def simpan_data():
     """menyimpan list data utama yg telah terformat kedalam file txt"""
