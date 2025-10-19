@@ -21,6 +21,8 @@ def init_terminal():
         # membuka dalam mode (read)
         with open(DB_NAME, "r") as file:
             print("Database tersedia, init selesai!!")
+            # memanggil load database
+            Operasi.load_database()
     # jika file txt tidak ada
     except:
         print("Database tidak ditemukan, membuat Database baru")
