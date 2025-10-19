@@ -115,7 +115,16 @@ def update(pk, date_add, no_buku, judul, penulis, tahun):
     index_buku = no_buku-1
     # mengubah list data buku sesuai index
     Database.DB_LIST[index_buku] = data
-    
+
+def delete(no_buku):
+    try:
+        # menghitung index buku
+        index_buku = no_buku - 1
+        # menghapus data buku berdasarkan indexnya di list database
+        Database.DB_LIST.pop(index_buku)
+    except:
+        print("buku gagal di hapus")
+        
 
 def save_database():
     """menyimpan list data utama yg telah terformat kedalam file txt"""

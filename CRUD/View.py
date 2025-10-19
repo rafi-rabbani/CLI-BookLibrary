@@ -138,3 +138,50 @@ def update_terminal():
 
     # memanggil update funtion dari operasi
     Operasi.update(pk, date_add, no_buku, judul, penulis, tahun)
+
+def delete_terminal():
+    while(True):
+        # menampilkan list buku yang ada
+        read_terminal()
+        # validasi apakah buku yang di pilih ada
+        while(True):
+            # mengambil input no buku
+            no_buku = int(input("\nSilahkan pilih nomor buku yang ingin anda HAPUS\nNO BUKU : "))
+            # mengambil data buku berdasarkan nomor buku
+            data_buku = Operasi.read(no_buku = no_buku)
+            # jika data buku ada, maka loop berhenti
+            if data_buku:
+                break
+            else:
+                print("no buku yang di pilih tidak valid")
+
+        # mengambil data buku tiap komponen
+        pk = data_buku["pk"]
+        date_add = data_buku["date_add"]
+        judul = data_buku["judul"]
+        penulis = data_buku["penulis"]
+        tahun = data_buku["tahun"]
+
+        # menampilkan data buku yang akan di hapus dan menanyakan keyakinan
+        is_done = input(
+            "\nIni adalah data buku yang ingin anda HAPUS" +
+            f"\n1. Judul\t:{judul}" +
+            f"\n2. Penulis\t:{penulis}" +
+            f"\n3. Tahun\t:{tahun}" +
+            "\nApakah Anda yakin (y/n) : ")
+        # jika iya, maka buku di hapus
+        if is_done.lower() == "y":
+            Operasi.delete(no_buku)
+            print(f"{'BUKU BERHASIL DIHAPUS':^133}")
+
+            # menanyakan apakah user ingin terus menghapus buku lain
+            is_continue = input("lanjutkan menghapus buku lain? (y/n) : ")
+            # jika tidak, maka loop berhenti
+            if is_continue.lower() == "n":
+                break
+        # jika tidak, menanyakan apakah ingin menghapus buku lain
+        else:
+            is_otherbook = input("Ingin menghapus buku lain? (y/n) : ")
+            # jika tidak, maka loop berhenti
+            if is_otherbook.lower() == "n":
+                break
